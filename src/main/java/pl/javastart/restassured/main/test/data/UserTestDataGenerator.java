@@ -6,7 +6,7 @@ public class UserTestDataGenerator extends TestDataGenerator {
 
     public User generateUser() {
         User user = new User();
-        user.setId(faker().number().numberBetween(3, 4));
+        user.setId(faker().number().numberBetween(1, 9999));
         user.setUsername(faker().name().username());
         user.setFirstName(faker().name().firstName());
         user.setLastName(faker().name().lastName());
