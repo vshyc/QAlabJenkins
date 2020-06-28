@@ -23,7 +23,6 @@ public class CreatePetTests extends SuiteTestBase {
                 .when().post("pet")
                 .then().statusCode(200).extract().as(Pet.class);
 
-        pet.setName("Diego");
         Assertions.assertThat(actualPet).describedAs("Send Pet was different than received by API").usingRecursiveComparison().isEqualTo(pet);
     }
 
