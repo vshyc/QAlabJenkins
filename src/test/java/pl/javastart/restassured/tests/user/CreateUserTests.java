@@ -1,5 +1,6 @@
 package pl.javastart.restassured.tests.user;
 
+import org.assertj.core.api.Assertions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import pl.javastart.restassured.main.pojo.ApiResponse;
@@ -8,11 +9,10 @@ import pl.javastart.restassured.main.test.data.UserTestDataGenerator;
 import pl.javastart.restassured.tests.testbases.SuiteTestBase;
 
 import static io.restassured.RestAssured.given;
-import static org.testng.Assert.assertEquals;
 
 public class CreateUserTests extends SuiteTestBase {
 
-    private User user; // Tworzymy pole typu User, w celu przekazania go do metody cleanUpAfterTest()
+    private User user;
 
     @Test
     public void givenUserWhenPostUserThenUserIsCreatedTest() {
@@ -24,20 +24,26 @@ public class CreateUserTests extends SuiteTestBase {
                 .when().post("user")
                 .then().statusCode(200).extract().as(ApiResponse.class);
 
-        assertEquals(apiResponse.getCode(), Integer.valueOf(200), "Code");
-        assertEquals(apiResponse.getType(), "unknown", "Type");
-        assertEquals(apiResponse.getMessage(), user.getId().toString(), "Message");
+        ApiResponse expectedApiResponse = new ApiResponse();
+        expectedApiResponse.setCode(200);
+        expectedApiResponse.setType("unknown");
+        expectedApiResponse.setMessage(user.getId().toString());
+
+        Assertions.assertThat(apiResponse).describedAs("Created User was not created by API").usingRecursiveComparison().isEqualTo(expectedApiResponse);
     }
 
     @AfterMethod
-    public void cleanUpAfterTest(){
+    public void cleanUpAfterTest() {
         ApiResponse apiResponse = given().contentType("application/json")
-                .when().delete("user/{username}", user.getUsername()) // Usuwamy użytkownika z podanym username
+                .when().delete("user/{username}", user.getUsername())
                 .then().statusCode(200).extract().as(ApiResponse.class);
 
-        assertEquals(apiResponse.getCode(), Integer.valueOf(200), "Code");
-        assertEquals(apiResponse.getType(), "unknown", "Type");
-        assertEquals(apiResponse.getMessage(), user.getUsername(), "Message"); // Sprawdzamy, czy w odpowiedzi systemu znajduje się usunięte username użytkownika
+        ApiResponse expectedApiResponse = new ApiResponse();
+        expectedApiResponse.setCode(200);
+        expectedApiResponse.setType("unknown");
+        expectedApiResponse.setMessage(user.getUsername());
+
+        Assertions.assertThat(apiResponse).describedAs("User was not deleted").usingRecursiveComparison().isEqualTo(expectedApiResponse);
     }
 
 }
