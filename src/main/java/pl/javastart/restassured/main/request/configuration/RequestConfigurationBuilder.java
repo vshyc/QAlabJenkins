@@ -2,6 +2,7 @@ package pl.javastart.restassured.main.request.configuration;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.config.RestAssuredConfig;
+import io.restassured.http.ContentType;
 import io.restassured.mapper.ObjectMapperType;
 import io.restassured.specification.RequestSpecification;
 
@@ -12,7 +13,7 @@ public class RequestConfigurationBuilder {
     public RequestSpecBuilder getRequestSpecBuilder() {
         return new RequestSpecBuilder()
                 .setConfig(RestAssuredConfig.config().objectMapperConfig(objectMapperConfig().defaultObjectMapperType(ObjectMapperType.GSON))) // Ustawiamy Object Mapper, w naszym wypadku jest to oczywiście GSON
-                .setContentType("application/json"); // Ustawiamy nagłówek ContentType
+                .setContentType(ContentType.JSON); // Ustawiamy nagłówek ContentType
     }
 
     public static RequestSpecification getDefaultRequestSpecification() {
