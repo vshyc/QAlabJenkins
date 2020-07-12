@@ -6,12 +6,10 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import pl.javastart.restassured.main.pojo.ApiResponse;
 import pl.javastart.restassured.main.pojo.user.User;
-import pl.javastart.restassured.main.request.configuration.RequestConfigurationBuilder;
 import pl.javastart.restassured.main.rop.CreateUserEndpoint;
+import pl.javastart.restassured.main.rop.DeleteUserEndpoint;
 import pl.javastart.restassured.main.test.data.UserTestDataGenerator;
 import pl.javastart.restassured.tests.testbases.SuiteTestBase;
-
-import static io.restassured.RestAssured.given;
 
 public class CreateUserTests extends SuiteTestBase {
 
@@ -34,9 +32,7 @@ public class CreateUserTests extends SuiteTestBase {
 
     @AfterMethod
     public void cleanUpAfterTest() {
-        ApiResponse apiResponse = given().spec(RequestConfigurationBuilder.getDefaultRequestSpecification())
-                .when().delete("user/{username}", user.getUsername())
-                .then().statusCode(HttpStatus.SC_OK).extract().as(ApiResponse.class);
+        ApiResponse apiResponse = new DeleteUserEndpoint().setUsername(user.getUsername()).sendRequest().assertRequestSuccess().getResponseModel();
 
         ApiResponse expectedApiResponse = new ApiResponse();
         expectedApiResponse.setCode(HttpStatus.SC_OK);
