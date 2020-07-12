@@ -1,4 +1,4 @@
-package pl.javastart.restassured.main.test.data;
+package pl.javastart.restassured.main.rop;
 
 import io.restassured.response.Response;
 import org.assertj.core.api.Assertions;
