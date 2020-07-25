@@ -68,7 +68,7 @@
                 <configuration>
                     <!--Konfiguracja Allura ze ścieżką do biblioteki aspectjweaver-->
                     <argLine>
-                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.8.10/aspectjweaver-1.8.10.jar"
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.5/aspectjweaver-1.9.5.jar"
                     </argLine>
                     <!--Nowy parametr określający gdzie maven-surefire-plugin ma zapisywać wyniki z testów-->
                     <systemPropertyVariables>
@@ -81,7 +81,7 @@
                     <dependency>
                         <groupId>org.aspectj</groupId>
                         <artifactId>aspectjweaver</artifactId>
-                        <version>1.8.10</version>
+                        <version>1.9.5</version>
                     </dependency>
                 </dependencies>
             </plugin>
