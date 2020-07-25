@@ -1,5 +1,6 @@
 package pl.javastart.restassured.main.rop;
 
+import io.qameta.allure.Step;
 import org.apache.http.HttpStatus;
 import pl.javastart.restassured.main.pojo.pet.Pet;
 import pl.javastart.restassured.main.request.configuration.RequestConfigurationBuilder;
@@ -17,6 +18,7 @@ public class CreatePetEndpoint extends BaseEndpoint<CreatePetEndpoint, Pet> {
         return Pet.class;
     }
 
+    @Step("Create Pet")
     @Override
     public CreatePetEndpoint sendRequest() {
         response = given().spec(RequestConfigurationBuilder.getDefaultRequestSpecification()).body(pet)

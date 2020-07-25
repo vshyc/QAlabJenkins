@@ -1,5 +1,6 @@
 package pl.javastart.restassured.main.rop;
 
+import io.qameta.allure.Step;
 import org.apache.http.HttpStatus;
 import pl.javastart.restassured.main.pojo.ApiResponse;
 import pl.javastart.restassured.main.request.configuration.RequestConfigurationBuilder;
@@ -17,6 +18,7 @@ public class DeletePetEndpoint extends BaseEndpoint<DeletePetEndpoint, ApiRespon
         return ApiResponse.class;
     }
 
+    @Step("Delete Pet")
     @Override
     public DeletePetEndpoint sendRequest() {
         response = given().spec(RequestConfigurationBuilder.getDefaultRequestSpecification())
