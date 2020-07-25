@@ -1,5 +1,9 @@
 package pl.javastart.restassured.tests.user;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.TmsLink;
 import org.apache.http.HttpStatus;
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.AfterMethod;
@@ -15,6 +19,9 @@ public class CreateUserTests extends SuiteTestBase {
 
     private User user;
 
+    @TmsLink("ID-3")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("The goal of this test is to create new user")
     @Test
     public void givenUserWhenPostUserThenUserIsCreatedTest() {
         UserTestDataGenerator userTestDataGenerator = new UserTestDataGenerator();

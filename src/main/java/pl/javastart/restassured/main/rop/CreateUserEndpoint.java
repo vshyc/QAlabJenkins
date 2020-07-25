@@ -1,5 +1,6 @@
 package pl.javastart.restassured.main.rop;
 
+import io.qameta.allure.Step;
 import org.apache.http.HttpStatus;
 import pl.javastart.restassured.main.pojo.ApiResponse;
 import pl.javastart.restassured.main.pojo.user.User;
@@ -18,6 +19,7 @@ public class CreateUserEndpoint extends BaseEndpoint<CreateUserEndpoint, ApiResp
         return ApiResponse.class;
     }
 
+    @Step("Create user")
     @Override
     public CreateUserEndpoint sendRequest() {
         response = given().spec(RequestConfigurationBuilder.getDefaultRequestSpecification())
