@@ -24,11 +24,10 @@ pipeline {
                         }
                     }
                 }
-        stage('Hello')
+        stage('Hello'){
             steps{
 
                sh 'echo "Hello"'
-
-            }
+               }
     }
 }
