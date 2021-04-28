@@ -17,5 +17,6 @@ public class SuiteTestBase {
         RestAssured.baseURI = environmentConfig.baseUri();
         RestAssured.basePath = environmentConfig.basePath();
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter(), new AllureRestAssured());
+
     }
 }
