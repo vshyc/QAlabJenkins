@@ -6,17 +6,18 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.TmsLink;
 import org.apache.http.HttpStatus;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import pl.javastart.restassured.main.rop.DeleteUserEndpoint;
 import pl.javastart.restassured.tests.testbases.SuiteTestBase;
 
 public class DeleteUserTests extends SuiteTestBase {
 
-    private String nonExistingUsername;
+    private static String nonExistingUsername;
 
-    @BeforeMethod
-    public void beforeTest(){
+    @BeforeAll
+    public static void beforeTest(){
         nonExistingUsername = new Faker().name().username();
         new DeleteUserEndpoint().setUsername(nonExistingUsername).sendRequest();
     }

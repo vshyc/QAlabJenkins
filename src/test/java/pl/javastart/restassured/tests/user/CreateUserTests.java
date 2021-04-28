@@ -6,8 +6,8 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.TmsLink;
 import org.apache.http.HttpStatus;
 import org.assertj.core.api.Assertions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Test;
 import pl.javastart.restassured.main.pojo.ApiResponse;
 import pl.javastart.restassured.main.pojo.user.User;
 import pl.javastart.restassured.main.rop.CreateUserEndpoint;
@@ -17,7 +17,7 @@ import pl.javastart.restassured.tests.testbases.SuiteTestBase;
 
 public class CreateUserTests extends SuiteTestBase {
 
-    private User user;
+    private static User user;
 
     @TmsLink("ID-3")
     @Severity(SeverityLevel.CRITICAL)
@@ -37,8 +37,8 @@ public class CreateUserTests extends SuiteTestBase {
         Assertions.assertThat(apiResponse).describedAs("Created User was not created by API").usingRecursiveComparison().isEqualTo(expectedApiResponse);
     }
 
-    @AfterMethod
-    public void cleanUpAfterTest() {
+    @AfterAll
+    public static void cleanUpAfterTest() {
         ApiResponse apiResponse = new DeleteUserEndpoint().setUsername(user.getUsername()).sendRequest().assertRequestSuccess().getResponseModel();
 
         ApiResponse expectedApiResponse = new ApiResponse();
