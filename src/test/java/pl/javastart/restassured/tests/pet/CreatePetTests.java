@@ -3,8 +3,10 @@ package pl.javastart.restassured.tests.pet;
 import io.qameta.allure.*;
 import org.apache.http.HttpStatus;
 import org.assertj.core.api.Assertions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
+
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import pl.javastart.restassured.main.pojo.ApiResponse;
 import pl.javastart.restassured.main.pojo.pet.Pet;
 import pl.javastart.restassured.main.rop.CreatePetEndpoint;
@@ -29,7 +31,7 @@ public class CreatePetTests extends SuiteTestBase {
         Assertions.assertThat(actualPet).describedAs("Send Pet was different than received by API").usingRecursiveComparison().isEqualTo(pet);
     }
 
-    @AfterMethod
+    @AfterEach
     public void cleanUpAfterTest() {
         ApiResponse apiResponse = new DeletePetEndpoint().setPetId(actualPet.getId()).sendRequest().assertRequestSuccess().getResponseModel();
         ApiResponse expectedApiResponse = new ApiResponse();
